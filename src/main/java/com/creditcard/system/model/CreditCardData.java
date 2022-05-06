@@ -1,9 +1,25 @@
 package com.creditcard.system.model;
 
+import java.math.BigDecimal;
+
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+@Setter
 @Table("CREDIT_CARD_DATA")
 public class CreditCardData 
 {	
@@ -15,48 +31,9 @@ public class CreditCardData
 	@Column("CUST_NAME")
     private String name;
 	@Column("BALANCE")
-    private String balance;
+    private BigDecimal balance;
 	@Column("CREDIT_LIMIT")
-    private String creditLimit;
+    private BigDecimal creditLimit;
 
    
-   	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getBalance() {
-		return balance;
-	}
-
-	public void setBalance(String balance) {
-		this.balance = balance;
-	}
-
-	
-   
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    
-
-    public String getCreditLimit() {
-        return creditLimit;
-    }
-
-    public void setCreditLimit(String creditLimit) {
-        this.creditLimit = creditLimit;
-    }
-
-   
-
-
 }

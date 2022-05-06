@@ -1,23 +1,62 @@
 package com.creditcard.system.utils;
 
-public class CreditCardValidator {
-	public static boolean luhnCheck(String number) {
-        int s1 = 0, s2 = 0;
-        String reverse = new StringBuffer(number).reverse().toString();
-        for (int i = 0; i < reverse.length(); i++) {
-            int digit = Character.digit(reverse.charAt(i), 10);
-            if (i % 2 == 0) {
-                //this is for odd digits, they are 1-indexed in the algorithm
-                s1 += digit;
-            } else {
-                //add 2 * digit for 0-4, add 2 * digit - 9 for 5-9
-                s2 += 2 * digit;
-                if (digit >= 5) {
-                    s2 -= 9;
-                }
-            }
-        }
-        return (s1 + s2) % 10 == 0;
-    }
+import java.util.Arrays;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+import com.creditcard.system.model.CreditCardData;
+
+public class CreditCardValidator implements ConstraintValidator<LuhnValidation, String> {
+	    @Override
+	    public boolean isValid(final String cardNumber, final ConstraintValidatorContext constraintValidatorContext) {
+	       boolean value= luhnCheck(cardNumber);
+	       return value;
+	    }
+	    
+	    /**
+	     * This is the validator to verify is a card valid based on Luhn's algorithm
+	     *
+	     * @param cardNumber cardNumber to be validated
+	     * @return is valid or not
+	     */    
+	public static boolean luhnCheck(String cardNumber) {
+		  int[] cardIntArray = new int[cardNumber.length()];
+
+	        for (int i = 0; i < cardNumber.length(); i++) {
+	             char c = cardNumber.charAt(i);
+	            if (!Character.isDigit(c)) {
+	                return false;
+	            }
+	            cardIntArray[i] = Integer.parseInt("" + c);
+	        }
+
+	        for (int i = cardIntArray.length - 2; i >= 0; i = i - 2) {
+	            int num = cardIntArray[i];
+	            num = num * 2;
+	            if (num > 9) {
+	                num = num % 10 + num / 10;
+	            }
+	            cardIntArray[i] = num;
+	        }
+
+	        return Arrays.stream(cardIntArray).sum() % 10 == 0;
+
+	    }
+	
+	 public static boolean validateCardDetails(CreditCardData creditCardData) {
+	        boolean cardResult = true;
+
+	        try {
+	            if (creditCardData.getCardNumber().length() > 19 || Long.parseLong(creditCardData.getCardNumber()) < 0) {
+	                cardResult = false;
+	            }
+	        } catch (NumberFormatException e) {
+	            cardResult = false;
+	        }
+
+	        return cardResult;
+	    }
+
 
 }
