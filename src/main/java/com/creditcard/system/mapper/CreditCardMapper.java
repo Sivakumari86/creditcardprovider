@@ -21,7 +21,7 @@ public class CreditCardMapper {
 		 CreditCardData creditCard = new CreditCardData();
 
 	        creditCard.setCardNumber(creditCardRequest.getCardNumber());
-	        creditCard.setCreditLimit(creditCardRequest.getLimit() );
+	        creditCard.setLimit(creditCardRequest.getLimit() );
 	        creditCard.setName( creditCardRequest.getName() );
 	        creditCard.setBalance(BigDecimal.valueOf(0));
 
@@ -36,7 +36,7 @@ public class CreditCardMapper {
 
 		CreditCardResponse creditCardResponse = new CreditCardResponse();
 
-        creditCardResponse.setLimit( CreditCardMapper.addCurrency( creditCard.getCreditLimit() ) );
+        creditCardResponse.setLimit( CreditCardMapper.addCurrency( creditCard.getLimit() ) );
         creditCardResponse.setBalance( CreditCardMapper.addCurrency( creditCard.getBalance() ) );
         creditCardResponse.setCardNumber( creditCard.getCardNumber() );
         

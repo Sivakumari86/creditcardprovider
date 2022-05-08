@@ -40,56 +40,41 @@ public class CreditCardController {
 	 	@GetMapping("/cards")
 	 	@ResponseStatus(value = HttpStatus.OK)
 	    public Flux<CreditCardData> getAllCreditCards() {
-		 System.out.println("method called");
-	        return cardProcessingService.getAllCards();
+		 
+		 Flux<CreditCardData> data = cardProcessingService.getAllCards();
+		 System.out.println("method called" +data.toString());
+	        return data;
 	    }
 	 	
-		
-		/*
-		 * @PostMapping(path = "cards", consumes = MediaType.APPLICATION_JSON_VALUE,
-		 * produces = MediaType.APPLICATION_JSON_VALUE) public ResponseEntity<Void>
-		 * createCreditCard(@Valid @RequestBody final CreditCardRequest
-		 * creditCardRequest) {
-		 * 
-		 * CreditCardData creditCard =
-		 * creditCardMapper.creditCardRequestToCreditCard(creditCardRequest);
-		 * 
-		 * cardProcessingService.createCreditCard(creditCard); return
-		 * ResponseEntity.created(locationByEntity(creditCard.getId())).build(); }
-		 */
-
-	 	 @ApiOperation(value = "It will add a new Credit Card")
+		 @ApiOperation(value = "It will add a new Credit Card")
 	     @ApiResponses(value = {
 	             @ApiResponse(code = 201, message = "Credit Card created"),
 	             @ApiResponse(code = 400, message = "Invalid request fields/ Using the same credit card which is already added")
 	     })
-		@PostMapping(path = "cards", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+		@PostMapping(path = "addCard", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	    public Mono<ResponseEntity> createCreditCard1(@Valid @RequestBody final CreditCardRequest creditCardRequest) {
 	 		
-			
-			  CreditCardData creditCard =
+			 CreditCardData creditCard =
 			  creditCardMapper.creditCardRequestToCreditCard(creditCardRequest);
 			
-			 
-					Mono<Long> id =	cardProcessingService.addCard(creditCard);
-					return id.map(value -> ResponseEntity.status(HttpStatus.CREATED).body("card added successfully"));
-					
-					 //return id.map(value -> ResponseEntity.status(HttpStatus.CREATED).body(new ResourceIdentity(value))).cast(ResponseEntity.class);
+			 	Mono<Long> id =	cardProcessingService.addCard(creditCard);
+					return id.map(value -> ResponseEntity
+							.status(HttpStatus.CREATED)
+							.body("card added successfully"));
+										
 	    }
 	 	
-	 	@PostMapping(value="/addCard")
-	    Mono<CreditCardData> addCardData(@Valid @RequestBody final CreditCardData creditCardData) {
-	 		System.out.println("add card called..");
-	 		Mono<CreditCardData> response = null ;
-	 		if (CreditCardValidator.luhnCheck(creditCardData.getCardNumber()) && CreditCardValidator.validateCardDetails(creditCardData)) {
-	 			System.out.println("card is validated...");
-	 			response= cardProcessingService.addCardDetails(creditCardData);
-	        } 
-	 		else {
-	 			
-	 		}
-	       return response;
-	    }
+		/*
+		 * @PostMapping(value="/addCardMono") Mono<CreditCardData>
+		 * addCardData(@Valid @RequestBody final CreditCardData creditCardData) {
+		 * System.out.println("add card called.."); Mono<CreditCardData> response = null
+		 * ; if (CreditCardValidator.luhnCheck(creditCardData.getCardNumber()) &&
+		 * CreditCardValidator.validateCardDetails(creditCardData)) {
+		 * System.out.println("card is validated..."); response=
+		 * cardProcessingService.addCardDetails(creditCardData); } else {
+		 * 
+		 * } return response; }
+		 */
 
 
 }

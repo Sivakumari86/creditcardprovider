@@ -39,9 +39,8 @@ public class CardProcessingServiceImpl implements CardProcessingService {
 	@Override
 	 public Mono<Long> addCard(CreditCardData creditCardData) {
 	        //catalogueItem.setCreatedOn(Instant.now());
-
-	        return
-	        		cardRepository
+System.out.println("Add card called in service");
+	        return cardRepository
 	                .save(creditCardData)
 	                .doOnSuccess(item -> publishCardEvent(CardEvent.CARD_CREATED, item))
 	                .flatMap(item -> Mono.just(item.getId()));

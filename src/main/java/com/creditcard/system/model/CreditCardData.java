@@ -33,7 +33,7 @@ public class CreditCardData
 	@Column("BALANCE")
     private BigDecimal balance;
 	@Column("CREDIT_LIMIT")
-    private BigDecimal creditLimit;
+    private BigDecimal limit;
 
    
 }
