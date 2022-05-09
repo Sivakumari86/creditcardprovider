@@ -3,6 +3,7 @@ package com.creditcard.system.mapper;
 import java.math.BigDecimal;
 
 import org.mapstruct.Named;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.creditcard.system.config.ServerConstants;
@@ -12,7 +13,8 @@ import com.creditcard.system.model.CreditCardResponse;
 
 @Component
 public class CreditCardMapper {
-
+	
+	
 	public  CreditCardData creditCardRequestToCreditCard(CreditCardRequest creditCardRequest) {
 		 if ( creditCardRequest == null ) {
 	            return null;

@@ -64,17 +64,20 @@ public class CreditCardController {
 										
 	    }
 	 	
-		/*
-		 * @PostMapping(value="/addCardMono") Mono<CreditCardData>
-		 * addCardData(@Valid @RequestBody final CreditCardData creditCardData) {
-		 * System.out.println("add card called.."); Mono<CreditCardData> response = null
-		 * ; if (CreditCardValidator.luhnCheck(creditCardData.getCardNumber()) &&
-		 * CreditCardValidator.validateCardDetails(creditCardData)) {
-		 * System.out.println("card is validated..."); response=
-		 * cardProcessingService.addCardDetails(creditCardData); } else {
-		 * 
-		 * } return response; }
-		 */
+		
+		  @PostMapping(value="/addCardMono") Mono<CreditCardData> addCardData(@Valid @RequestBody final CreditCardData creditCardData)
+		  {
+		  System.out.println("add card called.."); Mono<CreditCardData> response = null; 
+		  if (CreditCardValidator.luhnCheck(creditCardData.getCardNumber()) &&
+		  CreditCardValidator.validateCardDetails(creditCardData)) {
+		  System.out.println("card is validated..."); response=
+		  cardProcessingService.addCardDetails(creditCardData); } 
+		  else {
+		  
+		  } 
+		  return response;
+		  }
+		 
 
 
 }
