@@ -25,3 +25,6 @@ Junit-4 / Mockito
 3. Open the Swagger UI - http://localhost:8080/swagger-ui.html#/
 
 4. Create credit cards using the POST end point and get all credit card information using GET end point
+![image](https://user-images.githubusercontent.com/14796718/167381307-260aab39-4eb2-4bbf-9995-3c94c98665b4.png)
+![image](https://user-images.githubusercontent.com/14796718/167381495-c71e12d4-a78b-43ab-aa89-412b452c9f86.png)
+![image](https://user-images.githubusercontent.com/14796718/167381863-00dec88a-7ee7-4c89-a862-cbfae7f21150.png)
