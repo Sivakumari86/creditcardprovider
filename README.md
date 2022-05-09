@@ -1,13 +1,14 @@
 # creditcardprovider
 
-**Project**
+**Project** :
+
 This app exposes two REST end points :
 
 POST /credit/addCard - creates a new credit card with given card no against the given customer name
 
 GET /credit/cards/ - get  all credit cards
 
-**Tech / Framework used**
+**Tech / Framework used** :
 
 Spring Boot
 Spring REST
